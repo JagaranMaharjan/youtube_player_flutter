@@ -13,7 +13,10 @@ class FullScreenButton extends StatefulWidget {
     super.key,
     this.controller,
     this.color = Colors.white,
+    this.toggleScreenCallBack,
   });
+
+  final void Function(Function callback)? toggleScreenCallBack;
 
   /// Overrides the default [YoutubePlayerController].
   final YoutubePlayerController? controller;
@@ -41,6 +44,9 @@ class _FullScreenButtonState extends State<FullScreenButton> {
       _controller = widget.controller!;
     } else {
       _controller = controller;
+    }
+    if (widget.toggleScreenCallBack != null) {
+      widget.toggleScreenCallBack!(_controller.toggleFullScreenMode);
     }
     _controller.removeListener(listener);
     _controller.addListener(listener);
