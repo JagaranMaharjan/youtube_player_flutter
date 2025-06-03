@@ -62,7 +62,8 @@ class YoutubePlayer extends StatefulWidget {
   })  : progressColors = progressColors ?? const ProgressBarColors(),
         progressIndicatorColor = progressIndicatorColor ?? Colors.red;
 
-  final void Function(Function callback)? toggleScreenCallBack;
+  final void Function(Function callback, Duration currentDuration)?
+      toggleScreenCallBack;
 
   final bool showFullScreen;
 
@@ -377,9 +378,11 @@ class _YoutubePlayerState extends State<YoutubePlayer> {
                                 const PlaybackSpeedButton(),
                                 if (widget.showFullScreen) ...[
                                   FullScreenButton(
-                                    toggleScreenCallBack: (callback) {
+                                    toggleScreenCallBack:
+                                        (callback, currentDuration) {
                                       if (widget.toggleScreenCallBack != null) {
-                                        widget.toggleScreenCallBack!(callback);
+                                        widget.toggleScreenCallBack!(
+                                            callback, currentDuration);
                                       }
                                     },
                                   ),
